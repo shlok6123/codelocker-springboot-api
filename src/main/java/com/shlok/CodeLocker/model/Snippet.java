@@ -1,15 +1,8 @@
 package com.shlok.CodeLocker.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "snippets")
@@ -17,6 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Snippet {
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude // Important: Prevents infinite loops
+    @EqualsAndHashCode.Exclude
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

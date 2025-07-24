@@ -25,10 +25,17 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude // Important: Prevents infinite loops in logging
+    @EqualsAndHashCode.Exclude
+    private List<Snippet> snippets;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
+
+
 
     @Override
     public String getPassword() {
