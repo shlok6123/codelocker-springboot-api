@@ -1,5 +1,6 @@
 package com.shlok.CodeLocker.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     @ToString.Exclude // Important: Prevents infinite loops in logging
     @EqualsAndHashCode.Exclude
+    @JsonManagedReference
     private List<Snippet> snippets;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

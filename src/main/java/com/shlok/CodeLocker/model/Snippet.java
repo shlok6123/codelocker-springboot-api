@@ -1,5 +1,6 @@
 package com.shlok.CodeLocker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -15,6 +16,7 @@ public class Snippet {
     @JoinColumn(name = "user_id")
     @ToString.Exclude // Important: Prevents infinite loops
     @EqualsAndHashCode.Exclude
+    @JsonBackReference
     private User user;
 
     @Id
