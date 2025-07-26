@@ -27,7 +27,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch=FetchType.EAGER)
     @ToString.Exclude // Important: Prevents infinite loops in logging
     @EqualsAndHashCode.Exclude
     @JsonManagedReference

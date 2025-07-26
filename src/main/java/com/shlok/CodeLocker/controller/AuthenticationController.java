@@ -4,10 +4,9 @@ import com.shlok.CodeLocker.dto.AuthenticationResponse;
 import com.shlok.CodeLocker.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -19,5 +18,10 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authenticationService.register(request));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<Principal> getMe(Principal principal) {
+        return ResponseEntity.ok(principal);
     }
 }
